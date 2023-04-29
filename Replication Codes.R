@@ -2,6 +2,10 @@
 library(tidyverse)
 library(fixest)
 library(kableExtra)
+library(arrow)
+ProfitCovid = read_parquet("ProfitCovid.parquet")
+ProfitCovid_w = read_parquet("ProfitCovid_w.parquet")
+
 m1 = feols(roe_recurring_income ~ cash_ratio_l1 + log_at_l1 + log_bm_l1 + lev_l1 + sgr_l1 + saleturnover_l1 + xrd_at_l1 +
              boardsize_l1 + ind_ratio_l1 + foreign_ratio_l1 + dir_own_l1 |tej_industry_id + yyyy, ProfitCovid, vcov="hetero")
 m2 = feols(roe_recurring_income ~ cash_ratio_l1 + log_at_l1 + log_bm_l1 + lev_l1 + sgr_l1 + saleturnover_l1 + xrd_at_l1 +
